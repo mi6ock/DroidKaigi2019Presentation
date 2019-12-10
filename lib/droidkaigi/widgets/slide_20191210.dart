@@ -42,9 +42,10 @@ class Slide20191210 extends StatelessWidget {
           mainContentWidget: TitleSubtitleWidget(
             titleText: '要件',
             subtitleElements: const [
+              'Desktopアプリ',
               'クロスプラットフォーム',
-              'C/C++呼び出し可能',
-              'ファイルのやり取りが可能か',
+              'C/C++呼び出し',
+              'ローカルファイルのやり取り',
             ],
           ),
         ),
