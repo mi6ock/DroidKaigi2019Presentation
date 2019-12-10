@@ -56,6 +56,7 @@ class _FilePickerWidgetState extends State<FilePickerWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
                 color: Colors.blueGrey,
@@ -64,6 +65,9 @@ class _FilePickerWidgetState extends State<FilePickerWidget> {
                   style: smallTitleStyle,
                 ),
                 onPressed: () async => openPanel(),
+              ),
+              const SizedBox(
+                width: 32,
               ),
               FlatButton(
                 color: Colors.blueGrey,

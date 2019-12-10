@@ -33,6 +33,8 @@ dev_dependencies:
     path: menubar
   color_panel:
     path: color_panel
+  window_size:
+    path: window_size
 
   flutter_syntax_view:
   flexible_fitted_box:

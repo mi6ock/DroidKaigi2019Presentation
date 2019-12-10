@@ -116,17 +116,17 @@ class Slide20191210 extends StatelessWidget {
             mainContentWidget: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            CodeSyntaxWidget(title: "ツールのアンロック", lang: Syntax.DART, code: """
+            CodeSyntaxWidget(title: 'ツールのアンロック', lang: Syntax.DART, code: '''
 flutter channel master (macOSならdevでも可能)
 flutter config --enable-linux-desktop to enable Linux.
 flutter config --enable-macos-desktop to enable macOS.
 flutter config —enable-windows-desktop
-        """),
+        '''),
           ],
         )),
         BaseSlideWidget(
             mainContentWidget: CodeSyntaxWidget(
-                title: "ターゲットプラットフォームのオーバーライド", lang: Syntax.DART, code: """
+                title: 'ターゲットプラットフォームのオーバーライド', lang: Syntax.DART, code: '''
 void _setTargetPlatformForDesktop() {
   if (Platform.isLinux || Platform.isWindows) {
     debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
@@ -137,7 +137,7 @@ void main() async {
   _setTargetPlatformForDesktop();
   runApp(MyApp());
 }
-        """)),
+        ''')),
         BaseSlideWidget(
           mainContentWidget: TitleSubtitleWidget(
             titleText: '魅力',
@@ -161,17 +161,17 @@ void main() async {
         ),
         BaseSlideWidget(
           mainContentWidget: CodeSyntaxWidget(
-              title: "ディスクトップ向けプラグインの拡張", lang: Syntax.DART, code: """
+              title: 'ディスクトップ向けプラグインの拡張', lang: Syntax.DART, code: '''
 dependencies:
 ...
   url_launcher: ^5.0.0
   url_launcher_fde:
     path: relative/path/to/fde/plugins/flutter_plugins/url_launcher_fde
-"""),
+'''),
         ),
         BaseSlideWidget(
             mainContentWidget: CodeSyntaxWidget(
-                title: "ディスクトップ向けプラグインの拡張", lang: Syntax.DART, code: """
+                title: 'ディスクトップ向けプラグインの拡張', lang: Syntax.DART, code: '''
     ├── url_launcher
 │   ├── CHANGELOG.md
 │   ├── LICENSE
@@ -189,10 +189,10 @@ dependencies:
     ├── macos
     ├── pubspec.yaml
     └── windows
-""")),
+''')),
         BaseSlideWidget(
           mainContentWidget: TitleSubtitleWidget(
-            titleText: 'Desktopに必要そうな機能について紹介するよ',
+            titleText: 'Desktopに必要そうな機能について紹介します',
             subtitleElements: const [
               '検証はMacのみ',
               '主にflutter-desktop-embeddingのリポジトリを見て書いてます',
@@ -204,8 +204,8 @@ dependencies:
           mainContentWidget: TitleSubtitleWidget(
             titleText: 'キーボード入力',
             subtitleElements: const [
-              'TextFieldで文字入力取得できます',
               'RawKeyEventDataで生のキー入力取得できます',
+              'TextFieldで文字入力取得できます',
             ],
           ),
         ),
@@ -219,7 +219,7 @@ dependencies:
           mainContentWidget: TitleSubtitleWidget(
             titleText: 'メニューバー',
             subtitleElements: const [
-              'Flutter-destop-embeddingのリポジトリにあるmenubarでできます',
+              'Flutter-desktop-embeddingのリポジトリにあるmenubarでできます',
               '※macOSとLinuxのみ',
             ],
           ),
@@ -252,22 +252,20 @@ dependencies:
         ),
         BaseSlideWidget(
           mainContentWidget: CodeSyntaxWidget(
-              lang: Syntax.DART, title: "macOS向けセキュリティ設定 - ネットワーク", code: """
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+              lang: Syntax.DART, title: 'macOS向けセキュリティ設定 - ネットワーク', code: '''
+<--! fileName DebugProfile.entitlements -->
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
+<plist version='1.0'>
 <dict>
-    <key>com.apple.security.app-sandbox</key>
-    <true/>
-    <key>com.apple.security.cs.allow-jit</key>
-    <true/>
+    ......
     <key>com.apple.security.network.server</key>
     <true/>
 +   <key>com.apple.security.network.client</key>
 +   <true/>
 </dict>
 </plist>
-          """),
+          '''),
         ),
         BaseSlideWidget(
           mainContentWidget: FetchDataWidget(),
@@ -283,27 +281,71 @@ dependencies:
         ),
         BaseSlideWidget(
           mainContentWidget: CodeSyntaxWidget(
-              lang: Syntax.DART, title: "macOS向けセキュリティ設定 - ファイル", code: """
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+              lang: Syntax.DART, title: 'macOS向けセキュリティ設定 - ファイル', code: '''
+<--! fileName DebugProfile.entitlements -->
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE plist PUBLIC '-//Apple//DTD PLIST 1.0//EN' 'http://www.apple.com/DTDs/PropertyList-1.0.dtd'>
+<plist version='1.0'>
 <dict>
     .......
-    <key>com.apple.security.network.server</key>
-    <true/>
     <key>com.apple.security.network.client</key>
     <true/>
 +  <key>com.apple.security.files.user-selected.read-write</key>
 +  <true/>
 </dict>
 </plist>
-          """),
+          '''),
         ),
         BaseSlideWidget(
           mainContentWidget: FilePickerWidget(),
         ),
+//        BaseSlideWidget(
+//          mainContentWidget: TitleSubtitleWidget(
+//            titleText: '画面の情報取得',
+//            subtitleElements: const [
+//              'Flutter-desktop-embeddingのリポジトリにあるwindow_sizeでできます',
+//              'macOSとLinuxのみ'
+//            ],
+//          ),
+//        ),
+//        BaseSlideWidget(
+//          mainContentWidget: ScreenUtilWidget(),
+//        ),
         BaseSlideWidget(
-          mainContentWidget: Center(child: Plugins()),
+          mainContentWidget: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'その他GoogleチームがDesktop向けに提供しているプラグイン',
+                style: smallTitleStyle,
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Plugins(),
+            ],
+          ),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: TitleSubtitleWidget(
+            titleText: 'まとめ',
+            subtitleElements: const [
+              'macOSはAPIが安定しているため実際に動かしても安定していた(開発中クラッシュ0)',
+              'WindowsはGLFW→Win32→(UWP)、LinuxはGLFW→(GTK+?)に変更予定でプラグインの実装が無きものに可能性がある',
+              '(感想)macOS向けなら使っても良いかなと思いました'
+            ],
+          ),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: TitleSubtitleWidget(
+            titleText: '参考',
+            subtitleElements: const [
+              'https://github.com/google/flutter-desktop-embedding/blob/master/macOS-Security.md',
+              'https://github.com/flutter/flutter/wiki/Desktop-shells',
+              'https://github.com/salihgueler/DroidKaigi2019Presentation',
+              'https://medium.com/flutter-community/flutter-on-desktop-a-real-competitor-to-electron-4f049ea6b061'
+            ],
+          ),
         ),
       ],
     );
