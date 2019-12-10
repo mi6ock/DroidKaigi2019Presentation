@@ -3,8 +3,14 @@ import 'package:flutter_desktop_example/droidkaigi/styles.dart';
 import 'package:flutter_desktop_example/droidkaigi/widgets/base_slide_widget.dart';
 import 'package:flutter_desktop_example/droidkaigi/widgets/center_statement_widget.dart';
 import 'package:flutter_desktop_example/droidkaigi/widgets/code_syntax_widget.dart';
+import 'package:flutter_desktop_example/droidkaigi/widgets/data_serialization_widget.dart';
+import 'package:flutter_desktop_example/droidkaigi/widgets/fetch_data_widget.dart';
+import 'package:flutter_desktop_example/droidkaigi/widgets/file_picker_widget.dart';
 import 'package:flutter_desktop_example/droidkaigi/widgets/intro_slide.dart';
+import 'package:flutter_desktop_example/droidkaigi/widgets/keyboard_listener_widget.dart';
+import 'package:flutter_desktop_example/droidkaigi/widgets/set_menubar_widget.dart';
 import 'package:flutter_desktop_example/droidkaigi/widgets/table_20191210.dart';
+import 'package:flutter_desktop_example/droidkaigi/widgets/text_input_widget.dart';
 import 'package:flutter_desktop_example/droidkaigi/widgets/title_subtitle_widget.dart';
 import 'package:flutter_syntax_view/flutter_syntax_view.dart';
 
@@ -67,8 +73,8 @@ class Slide20191210 extends StatelessWidget {
             titleText: 'Flutter',
             subtitleElements: const [
               'Flutterの利点をそのまま使える',
-              'Github Star 81k(Desktop : 6k)'
-                  '開発フェーズはアルファより前(Super Alpha)',
+              'Github Star 81k(Desktop : 6k)',
+              '開発フェーズはアルファより前(Super Alpha)',
               'WindowsやLinuxは将来大きなアーキテクチャの変更が入る',
             ],
           ),
@@ -78,7 +84,7 @@ class Slide20191210 extends StatelessWidget {
         ),
         BaseSlideWidget(
           mainContentWidget:
-              CenterStatementWidget('悔しいのでFlutter Desktopについて話すよ!'),
+              CenterStatementWidget('悔しいのでFlutter Desktopについて話します!'),
         ),
         BaseSlideWidget(
           mainContentWidget: SizedBox(
@@ -134,26 +140,23 @@ void main() async {
         """)),
         BaseSlideWidget(
           mainContentWidget: TitleSubtitleWidget(
-            titleText: '魅力①',
+            titleText: '魅力',
             subtitleElements: const [
-              'Flutterの美しいMaterialなUI、Hot Reloadによる迅速な開発が可能'
+              'Flutterの美しいMaterialなUIが使える',
+              'Hot Reloadによる迅速な開発が可能',
+              'Packageなら使える(API改修などで使えないことも)'
             ],
           ),
         ),
         BaseSlideWidget(
           mainContentWidget: TitleSubtitleWidget(
-            titleText: '魅力②',
+            titleText: 'Plugins',
             subtitleElements: const [
-              'C/C++の呼び出しができる',
-              'Windows, LinuxはC API',
-              'WindowsとLinuxのPluginsではC++が使われているので呼び出しが容易'
+              '対応しているPluginsが少ない?拡張できます',
+              'WindowsはC++とvsxprojを使用',
+              'macOSはSwiftおよびObjective-c(m,h)とcocoapodを使用',
+              'LinuxはC++とMakeを使用',
             ],
-          ),
-        ),
-        BaseSlideWidget(
-          mainContentWidget: TitleSubtitleWidget(
-            titleText: '魅力③',
-            subtitleElements: const ['対応しているPluginsが少ない?拡張できます'],
           ),
         ),
         BaseSlideWidget(
@@ -161,9 +164,9 @@ void main() async {
               title: "ディスクトップ向けプラグインの拡張", lang: Syntax.DART, code: """
 dependencies:
 ...
-url_launcher: ^5.0.0
-url_launcher_fde:
-  path: relative/path/to/fde/plugins/flutter_plugins/url_launcher_fde
+  url_launcher: ^5.0.0
+  url_launcher_fde:
+    path: relative/path/to/fde/plugins/flutter_plugins/url_launcher_fde
 """),
         ),
         BaseSlideWidget(
@@ -189,13 +192,119 @@ url_launcher_fde:
 """)),
         BaseSlideWidget(
           mainContentWidget: TitleSubtitleWidget(
-            titleText: '使えそうなPlugins',
-            subtitleElements: const ['対応しているPluginsが少ない?拡張できます'],
+            titleText: 'Desktopに必要そうな機能について紹介するよ',
+            subtitleElements: const [
+              '検証はMacのみ',
+              '主にflutter-desktop-embeddingのリポジトリを見て書いてます',
+              'リポジトリ: https://github.com/google/flutter-desktop-embedding)',
+            ],
           ),
         ),
         BaseSlideWidget(
+          mainContentWidget: TitleSubtitleWidget(
+            titleText: 'キーボード入力',
+            subtitleElements: const [
+              'TextFieldで文字入力取得できます',
+              'RawKeyEventDataで生のキー入力取得できます',
+            ],
+          ),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: KeyboardListenerWidget(),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: TextInputWidget(),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: TitleSubtitleWidget(
+            titleText: 'メニューバー',
+            subtitleElements: const [
+              'Flutter-destop-embeddingのリポジトリにあるmenubarでできます',
+              '※macOSとLinuxのみ',
+            ],
+          ),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: SetMenubarWidget(),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: TitleSubtitleWidget(
+            titleText: 'データ永続化',
+            subtitleElements: const [
+              'SharedPreferences ※macOSのみ',
+              'sembast(100%Dartで書かれたドキュメント指向のデータベース,IndexedDBとかnedbに似ている)',
+              'sembast: https://pub.dev/packages/sembast',
+            ],
+          ),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: DataSerializationWidget(),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: TitleSubtitleWidget(
+            titleText: 'ネットワーク接続',
+            subtitleElements: const [
+              'dioでお試し',
+              'dio: https://pub.dev/packages/dio',
+              'json placeholder: https://jsonplaceholder.typicode.com/'
+            ],
+          ),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: CodeSyntaxWidget(
+              lang: Syntax.DART, title: "macOS向けセキュリティ設定 - ネットワーク", code: """
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+    <key>com.apple.security.cs.allow-jit</key>
+    <true/>
+    <key>com.apple.security.network.server</key>
+    <true/>
++   <key>com.apple.security.network.client</key>
++   <true/>
+</dict>
+</plist>
+          """),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: FetchDataWidget(),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: TitleSubtitleWidget(
+            titleText: 'ファイル選択',
+            subtitleElements: const [
+              'Flutter-destop-embeddingのリポジトリにあるfile_chooserでできます',
+              'WindowsとmacOSのみ'
+            ],
+          ),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: CodeSyntaxWidget(
+              lang: Syntax.DART, title: "macOS向けセキュリティ設定 - ファイル", code: """
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    .......
+    <key>com.apple.security.network.server</key>
+    <true/>
+    <key>com.apple.security.network.client</key>
+    <true/>
++  <key>com.apple.security.files.user-selected.read-write</key>
++  <true/>
+</dict>
+</plist>
+          """),
+        ),
+        BaseSlideWidget(
+          mainContentWidget: FilePickerWidget(),
+        ),
+        BaseSlideWidget(
           mainContentWidget: Center(child: Plugins()),
-        )
+        ),
       ],
     );
   }

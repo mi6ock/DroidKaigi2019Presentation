@@ -81,7 +81,7 @@ class _LocalFilePickerPageState extends State<LocalFilePickerPage> {
       items.add(menuItem);
     }
 
-    Submenu itemAll = Submenu(label: "sample1", children: items);
+    Submenu itemAll = Submenu(label: "HelloWorld", children: items);
     setApplicationMenu([itemAll]);
   }
 

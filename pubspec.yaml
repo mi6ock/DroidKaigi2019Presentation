@@ -35,7 +35,13 @@ dev_dependencies:
     path: color_panel
 
   flutter_syntax_view:
+  flexible_fitted_box:
+    path: flexible_fitted_box
 
+  markdown:
+  flutter_html:
+  sembast:
+  dio:
 
 
 

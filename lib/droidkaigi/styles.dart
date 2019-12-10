@@ -16,6 +16,8 @@ const TextStyle mediumTitleStyle =
 const TextStyle smallTitleStyle =
     TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 36);
 
+const TextStyle extraSmallTitleStyle =
+    TextStyle(color: Colors.white, fontWeight: FontWeight.w400, fontSize: 24);
 const TextStyle bottomBarTextStyle = TextStyle(
     color: Colors.white,
     fontWeight: FontWeight.w400,

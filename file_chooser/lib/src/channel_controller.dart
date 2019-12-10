@@ -11,6 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+import 'dart:developer';
+
 import 'package:flutter/services.dart';
 
 import 'callbacks.dart';
@@ -20,6 +22,7 @@ const String _kChannelName = 'flutter/filechooser';
 
 /// The method name to instruct the native plugin to show an open panel.
 const String _kShowOpenPanelMethod = 'FileChooser.Show.Open';
+
 /// The method name to instruct the native plugin to show a save panel.
 const String _kShowSavePanelMethod = 'FileChooser.Show.Save';
 
@@ -28,11 +31,14 @@ const String _kShowSavePanelMethod = 'FileChooser.Show.Save';
 /// The path, as a string, for initial directory to display. Default behavior is
 /// left to the OS if not provided.]
 const String _kInitialDirectoryKey = 'initialDirectory';
+
 /// The initial file name that should appears in the file chooser. Defaults to
 /// an empty string if not provided.
 const String _kInitialFileNameKey = 'initialFileName';
+
 /// An array of UTI or file extension strings a panel is allowed to choose.
 const String _kAllowedFileTypesKey = 'allowedFileTypes';
+
 /// The text that appears on the panel's confirmation button. If not provided,
 /// the OS default is used.
 const String _kConfirmButtonTextKey = 'confirmButtonText';
@@ -42,6 +48,7 @@ const String _kConfirmButtonTextKey = 'confirmButtonText';
 /// A boolean indicating whether a panel should allow choosing multiple file
 /// paths. Defaults to false if not set.
 const String _kAllowsMultipleSelectionKey = 'allowsMultipleSelection';
+
 /// A boolean indicating whether a panel should allow choosing directories
 /// instead of files. Defaults to false if not set.
 const String _kCanChooseDirectoriesKey = 'canChooseDirectories';
@@ -121,21 +128,23 @@ class FileChooserChannelController {
   void show(FileChooserType type, FileChooserConfigurationOptions options,
       FileChooserCallback callback) {
     try {
+      log("show dialog");
       final methodName = type == FileChooserType.open
           ? _kShowOpenPanelMethod
           : _kShowSavePanelMethod;
       _channel
           .invokeMethod(methodName, options.asInvokeMethodArguments())
           .then((response) {
+        log("loaded");
         final paths = response?.cast<String>();
         final result =
             paths == null ? FileChooserResult.cancel : FileChooserResult.ok;
         callback(result, paths);
       });
     } on PlatformException catch (e) {
-      print('File chooser plugin failure: ${e.message}');
+      log('File chooser plugin failure: ${e.message}');
     } on Exception catch (e, s) {
-      print('Exception during file chooser operation: $e\n$s');
+      log('Exception during file chooser operation: $e\n$s');
     }
   }
 }
